@@ -13,7 +13,7 @@ namespace WeatherAPP.ViewModel.Helpers
         // http://dataservice.accuweather.com/currentconditions/v1/311399?apikey=API_KEY
 
         public const string BaseUrl = "http://dataservice.accuweather.com/";
-        public const string ApiKey = "put your API key here";
+        public const string ApiKey = "put in your API Key";
 
         // 0 api key 1 query 
         public const string AutoCompleteEndPoint = "locations/v1/cities/autocomplete?apikey={0}&q={1}";
