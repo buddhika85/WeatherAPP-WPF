@@ -5,9 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WeatherAPP.View"
         mc:Ignorable="d"
-        Title="Weather Window" Height="600" Width="400">
+        Title="Weather Window" Height="600" Width="400"
+        xmlns:vm="clr-namespace:WeatherAPP.ViewModel">
 
-    <Grid>
+    <Window.Resources>
+        <vm:WeatherWindowViewModel x:Key="ViewModel" />
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource ViewModel}">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -16,7 +21,7 @@
 
         <StackPanel Margin="20">
             <TextBlock Text="Search for a city:"></TextBlock>
-            <TextBox/>
+            <TextBox Text="{Binding Query, Mode=TwoWay}" />
             <Button Margin="0,10" Content="Search"></Button>
             <ListView>
                 <ListView.ItemTemplate>
@@ -29,7 +34,9 @@
             </ListView>
         </StackPanel>
 
-        <Grid Grid.Row="1" Background="#4392f1">
+        <Grid Grid.Row="1" 
+              Background="#4392f1"
+              DataContext="{Binding CurrentCondition}">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -37,11 +44,13 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Margin="0,10">
-                <TextBlock Text="Colombo"
+                <TextBlock 
+                           DataContext="{StaticResource ViewModel}"
+                           Text="{Binding SelectedCity.LocalizedName}"
                            Foreground="#f4f4f8"
                            FontSize="18"
                            Margin="20,0"></TextBlock>
-                <TextBlock Text="overcast"
+                <TextBlock Text="{Binding WeatherText}"
                            Foreground="#f4f4f8"
                            FontSize="18"
                            Margin="20,0"></TextBlock>
@@ -49,7 +58,7 @@
 
             <TextBlock Grid.Column="1"
                        VerticalAlignment="Center"
-                       Text="11 C"
+                       Text="{Binding Temperature.Metric, StringFormat={}{0} °C}"
                        Foreground="#f4f4f8"
                        FontSize="30"
                        Margin="20,0"></TextBlock>
