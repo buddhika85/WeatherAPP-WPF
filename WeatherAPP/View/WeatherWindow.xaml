@@ -26,11 +26,12 @@
             <Button Margin="0,10" Content="Search"
                     Command="{Binding SearchCommand}"
                     CommandParameter="{Binding Query}"></Button>
-            <ListView>
+            <ListView ItemsSource="{Binding Cities}"
+                      SelectedValue="{Binding SelectedCity}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <TextBlock/>
+                            <TextBlock Text="{Binding LocalizedName}"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
