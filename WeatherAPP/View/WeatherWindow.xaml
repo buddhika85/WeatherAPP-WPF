@@ -6,10 +6,13 @@
         xmlns:local="clr-namespace:WeatherAPP.View"
         mc:Ignorable="d"
         Title="Weather Window" Height="600" Width="400"
-        xmlns:vm="clr-namespace:WeatherAPP.ViewModel">
+        xmlns:vm="clr-namespace:WeatherAPP.ViewModel"
+        xmlns:converters="clr-namespace:WeatherAPP.ViewModel.ValueConverters">
 
     <Window.Resources>
+        <converters:BoolToRainConverter x:Key="RainConverter" />
         <vm:WeatherWindowViewModel x:Key="ViewModel" />
+
     </Window.Resources>
 
     <Grid DataContext="{StaticResource ViewModel}">
@@ -55,6 +58,11 @@
                            FontSize="18"
                            Margin="20,0"></TextBlock>
                 <TextBlock Text="{Binding WeatherText}"
+                           Foreground="#f4f4f8"
+                           FontSize="18"
+                           Margin="20,0"></TextBlock>
+                <TextBlock Text="{Binding HasPrecipitation,
+                    Converter={StaticResource RainConverter}}"
                            Foreground="#f4f4f8"
                            FontSize="18"
                            Margin="20,0"></TextBlock>
